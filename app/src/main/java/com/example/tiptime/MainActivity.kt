@@ -50,10 +50,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-/**
- * Écran principal. Il est le propriétaire de l'état [amountInput] (hissage d'état,
- * slides 73 à 82) et le transmet à [EditNumberField], devenu un composable sans état.
- */
 @Composable
 fun TipTimeLayout() {
     // État hissé depuis EditNumberField() (slide 79)
@@ -61,7 +57,7 @@ fun TipTimeLayout() {
     // Conversion String -> Double avec l'opérateur Elvis (slides 66-67)
     val amount = amountInput.toDoubleOrNull() ?: 0.0
     // Montant du pourboire calculé à partir de la saisie (slides 67 et 80)
-    val tip = calculateTip(amount)
+
 
     Column(
         modifier = Modifier
@@ -96,11 +92,6 @@ fun TipTimeLayout() {
     }
 }
 
-/**
- * Champ de saisie du montant de la facture.
- * Composable SANS ÉTAT : la valeur et le rappel de modification sont fournis par l'appelant
- * (paramètres `value` et `onValueChange`, slides 76 à 78).
- */
 @Composable
 fun EditNumberField(
     value: String,
@@ -117,10 +108,6 @@ fun EditNumberField(
     )
 }
 
-/**
- * Calcule le pourboire en fonction du montant de la facture et du pourcentage
- * (15 % par défaut), puis le formate en devise (slide 64).
- */
 private fun calculateTip(amount: Double, tipPercent: Double = 15.0): String {
     val tip = tipPercent / 100 * amount
     return NumberFormat.getCurrencyInstance().format(tip)
